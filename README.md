@@ -70,7 +70,7 @@ sudo docker run --gpus <num-gpu> -it -d  \
 
 - `model_base.py`: In this file, you will find a wrapper model class `PreTrainedModelWrapper` around a (`transformers.PreTrainedModel`) to be compatible with the (`~transformers.PreTrained`) class in order to keep some attributes and methods of the (`~transformers.PreTrainedModel`) class. You can save a checkpoint through `PreTrainedModelWrapper.save_pretrained(model_name_or_path)` and load a checkpoint locally or from HuggingFace hub through the method `PreTrainedModelWrapper.from_pretrained(model_name_or_path)`.
 - `model_dpo.py`: In this file, you will implement your DPO model. Read and complete the TODOs. Note that TODO (Optional) is not required; You only need to do these if you want to add custom modules to your model. If you are working with a causal language model like GPT-2 or LLama2, use the `AutoDPOModelForCausalLM` class. If you are working with a sequence-to-sequence language model like T5 or Bart, use the `AutoDPOModelForSeq2SeqLM` class. The functions that are required for all to implement including `forward`, `prediction_step_reward`, and `prediction_step_mcqa`.
-- In addition to a transformer model, you can add custom modules to the `AutoDPOModel` classes. Below is an example custom module. You can follow the `TODO (Optional)` to proprely integrate a custom module into the main model.
+- In addition to a transformer model, you can add custom modules to the `AutoDPOModel` classes. Below is an example custom module. You can follow the `TODO (Optional)` to integrate a custom module into the main model.
 
 ### Basic Model functionalities
 
@@ -88,8 +88,8 @@ model = AutoModelForCausalLM.from_pretrained(model_name)
 tokenizer = AutoTokenizer.from_pretrained(model_name)
 
 # Initialize your model class and import the pre-trained model into your class
-# Note that if you have custom module in your class
-# You should initilize the weights of this module in the `__init__` function
+# Note that if you have a custom module in your class
+# You should initialize the weights of this module in the `__init__` function
 model_wrapper = AutoDPOModelForCausalLM(pretrained_model=model)
 ```
 
@@ -152,7 +152,7 @@ class CustomModule(nn.Module):
 
 ```yaml
 "team_name": "Team 1" # Your team name
-"eval_method": ["mcqa", "rag"] # Tells the evaluator which evaluations need to executed. choices = [mcqa, reward, rag, compression]
+"eval_method": ["mcqa", "rag"] # Tells the evaluator which evaluations need to be executed. choices = [mcqa, reward, rag, compression]
 "task_type": "causal_lm" # Identifies which model class you use. choices = [causal_lm, seq2seq]
 "policy_model_path": "./checkpoints/best_model/" # Your path to the final checkpoint
 "reference_model_path": "microsoft/phi-2" # The repo id of your pretrained DPO reference model
@@ -169,9 +169,9 @@ class CustomModule(nn.Module):
 
 - Note: `eval_method`'s value must be a list object.
 
-- Note: `reward` and `mcqa` cannot co-exisit in the `eval_method` list in the same time.
+- Note: `reward` and `mcqa` cannot co-exist in the `eval_method` list at the same time.
 
-- For detailed evaluation methods and the input and output of each evaluation function, please take a look at the evaluation script code.
+Please review the evaluation script code for detailed evaluation methods and the input and output of each evaluation function.
 
 ## Deliverables (for the coding part of the project)
 
@@ -189,5 +189,4 @@ class CustomModule(nn.Module):
   - [ ] Any support model checkpoints (if required for your implementation)
   - [ ] All tokenizer models used by your implementation
 - [ ] `requirements.txt` includes all the dependencies required by your implementation
-- [ ] `Dockerfile` includes all the details about the docker image required by your implementation. (Only if you used docker)
-- [ ] (Required for groups doing RAG) `documents` directory that contains all the documents you need to retrieve from.
+- [ ] (Required for groups doing RAG) `documents` directory that contains all the documents you need to retrieve from. You can take a look at some example documents in this [Kaggle Challenge](https://www.kaggle.com/datasets/rtatman/questionanswer-dataset?resource=download).
