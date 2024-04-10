@@ -20,6 +20,7 @@ In Milestone 2, you will implement the alignment method Direct Preference Optimi
 │   │   ├── your_dataset_name
 │   │   │   └── ...
 │   │   └── ...
+├── documents (For RAG only)
 ├── models
 │       ├── model_base.py
 │       └── model_dpo.py
