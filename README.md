@@ -161,7 +161,8 @@ class CustomModule(nn.Module):
 "dpo_model_args": null # Any required arguments to load your dpo model using "from_pretrained"
 "rag_model_args": # Any required arguments to load your rag model using "from_pretrained" For example:
     "encoder_model_path": "facebook/bart-large"
-    "reteiver_model_path": "./checkpoints/rag_retriever"
+    "retriever_model_path": "./checkpoints/rag_retriever"
+    "document_dir": "./data/documents"
 "quantized_model_args": null # Any required arguments to load your quantized model using "from_pretrained"
 ```
 
