@@ -9,5 +9,6 @@
 "dpo_model_args": null # Put any model arguments required to load your DPO model below
 "rag_model_args": # Put any model arguments required to load your rag model below
   "encoder_model_path": "facebook/bart-large"
-  "reteiver_model_path": "./checkpoints/rag_retriever"
+  "retriever_model_path": "./checkpoints/rag_retriever"
+  "document_dir": "./data/documents"
 "quantized_model_args": null # Put any model arguments required to load your quantized model below
