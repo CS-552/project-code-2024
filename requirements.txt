@@ -1,0 +1,11 @@
+transformers
+datasets
+evaluate
+nltk
+tensorboard
+wandb
+optimum
+accelerate
+torch
+bitsandbytes
+peft
