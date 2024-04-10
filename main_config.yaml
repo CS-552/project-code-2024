@@ -1,0 +1,13 @@
+"team_name": "Team 1" # Your team name
+"eval_method": ["mcqa"] # mcqa, reward, rag, compression
+"task_type": "causal_lm" # causal_lm, seq2seq
+"policy_model_path": "./checkpoints/best_model/" # Your path to the final checkpoint
+"reference_model_path": "microsoft/phi-2" # The repo id of your pretrained reference model
+"quantized_policy_model_path": "./checkpoints/best_model_quantized/" # Your path to the final quantized checkpoint
+"rag_policy_model_path": "./checkpoints/best_model_rag/" # Your path to the final RAG checkpoint
+"test_data_path": "./data/mmlu.jsonl" # Your path to the test data
+"dpo_model_args": null # Put any model arguments required to load your DPO model below
+"rag_model_args": # Put any model arguments required to load your rag model below
+  "encoder_model_path": "facebook/bart-large"
+  "reteiver_model_path": "./checkpoints/rag_retriever"
+"quantized_model_args": null # Put any model arguments required to load your quantized model below
