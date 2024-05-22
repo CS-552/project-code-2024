@@ -3,10 +3,10 @@ import yaml
 import glob
 import torch
 import logging
-import evaluate
 import numpy as np
 
 from torch.utils.data import DataLoader
+from sklearn.metrics import accuracy_score
 
 from typing import Dict, Union, List, Any, Tuple
 from transformers import PreTrainedTokenizerBase, AutoTokenizer
@@ -14,11 +14,6 @@ from transformers import PreTrainedTokenizerBase, AutoTokenizer
 from utils import read_jsonl, write_json
 from models.model_base import PreTrainedModelWrapper
 from models.model_dpo import AutoDPOModelForCausalLM, AutoDPOModelForSeq2SeqLM
-
-accuracy_metric = evaluate.load("accuracy")
-
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
-logger = logging.getLogger("mnlp-2024-auto-evaluator")
 
 def repository_check():
     """
@@ -95,9 +90,8 @@ class DPOModelEvaluator():
             batch (`dict` of `list`): A dictrionary containing the input MCQA questions data for the DPO model.
                    The data format is as follows:
                     {
-                        "question": List[str],
-                        "choices": List[List[str]],
-                        "answer": List[str],
+                        "question": List[str], each <str> contains the question body and the choices.
+                        "answer": List[str], each <str> is a single letter representing the correct answer.
                     }
         Returns:
            preds (`list` of `str`): A list of predicted choices for the MCQA questions.
@@ -127,14 +121,15 @@ class DPOModelEvaluator():
             policy_preds = self.get_batch_predictions_mcqa(
                 policy_model, self.policy_tokenizer, batch)
             all_policy_preds.extend(policy_preds)
-            all_labels.extend(batch["labels"])
+            all_labels.extend(batch["answer"])
 
         # Clear the GPU memory allocated for the policy model
         del policy_model
         torch.cuda.empty_cache()
 
-        policy_accuracy = accuracy_metric.compute(
-            references=all_labels, predictions=all_policy_preds)
+        policy_accuracy = accuracy_score(
+            y_true=all_labels,
+            y_pred=all_policy_preds)
         return policy_accuracy
 
     def get_batch_predictions_reward(
