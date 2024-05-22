@@ -15,6 +15,9 @@ from utils import read_jsonl, write_json
 from models.model_base import PreTrainedModelWrapper
 from models.model_dpo import AutoDPOModelForCausalLM, AutoDPOModelForSeq2SeqLM
 
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logger = logging.getLogger("mnlp-2024-auto-evaluator")
+
 def repository_check():
     """
     Check if the repository is correctly set up.
