@@ -1,5 +1,5 @@
 "team_name": "Team 1" # Your team name
-"eval_method": ["mcqa"] # mcqa, reward, rag, quantize
+"eval_method": ["mcqa"] # mcqa, reward, rag, quantiz
 "task_type": "causal_lm" # causal_lm, seq2seq
 "policy_model_path": "./checkpoints/best_model/" # Your path to the final checkpoint
 "reference_model_path": "microsoft/phi-2" # The repo id of your pretrained reference model
