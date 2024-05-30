@@ -152,7 +152,7 @@ class CustomModule(nn.Module):
 
 ```yaml
 "team_name": "Team 1" # Your team name
-"eval_method": ["mcqa", "rag"] # Tells the evaluator which evaluations need to be executed. choices = [mcqa, reward, rag, compression]
+"eval_method": ["mcqa", "rag"] # Tells the evaluator which evaluations need to be executed. choices = [mcqa, reward, rag, quantiz]
 "task_type": "causal_lm" # Identifies which model class you use. choices = [causal_lm, seq2seq]
 "policy_model_path": "./checkpoints/best_model/" # Your path to the final checkpoint
 "reference_model_path": "microsoft/phi-2" # The repo id of your pretrained DPO reference model
