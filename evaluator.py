@@ -451,7 +451,7 @@ if __name__ == '__main__':
                     quantized_model_path=quantized_model_path,
                     policy_model_args=dpo_model_args,
                     quantized_model_args=quantized_model_args)
-                orig_size, quantized_size, quantized = evaluator.check_model_quantization()
+                quantized_size, orig_size, quantized = evaluator.check_model_quantization()
                 metrics["orig_model_size"] = orig_size
                 metrics["quantized_model_size"] = quantized_size
                 metrics["quantized"] = quantized
