@@ -319,8 +319,15 @@ class QuantizedEvaluator():
         self.policy_model_path = policy_model_path
         self.quantized_model_path = quantized_model_path
 
-        self.quantized_model_args = quantized_model_args
-        self.policy_model_args = policy_model_args
+        if policy_model_args is None:
+            self.policy_model_args = {}
+        else:
+            self.policy_model_args = policy_model_args
+        
+        if quantized_model_args is None:
+            self.quantized_model_args = {}
+        else:
+            self.quantized_model_args = quantized_model_args
 
         self.quantized_dpo_evaluator = DPOModelEvaluator(
             task_type=task_type,
